@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Hóa 12 - Đại Cương Về Cơ Chế Phản Ứng</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Lexend -->
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lexend', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        chem: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(15, 118, 110, 0.15);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(13, 148, 136, 0.3);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="h-full bg-slate-900 text-slate-100 font-sans antialiased flex flex-col justify-between selection:bg-teal-500 selection:text-white">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700/60 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center text-slate-900 shadow-lg shadow-teal-500/20">
+                    <i class="fa-solid fa-flask-vial text-xl font-bold"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg text-white leading-tight">Hóa Học 12 - Chuyên Đề 1</h1>
+                    <p class="text-xs text-teal-400 font-medium">Bài 1: Đại cương về cơ chế phản ứng</p>
+                </div>
+            </div>
+            <div id="badge-total" class="px-3 py-1 bg-teal-500/10 border border-teal-500/30 rounded-full text-xs font-semibold text-teal-300 flex items-center gap-1.5">
+                <i class="fa-solid fa-book-open"></i>
+                <span>20 Câu Trắc Nghiệm</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 sm:p-6 flex flex-col justify-center">
+
+        <!-- SCREEN 1: Welcome & Overview -->
+        <div id="screen-welcome" class="bg-slate-800/90 border border-slate-700/80 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl text-center space-y-6">
+            <div class="inline-flex p-5 bg-gradient-to-tr from-teal-500/20 to-indigo-500/20 border border-teal-500/30 rounded-3xl text-teal-400 mb-2 animate-pulse-ring">
+                <i class="fa-solid fa-atom text-5xl"></i>
+            </div>
+            
+            <div class="space-y-3">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">Ôn Tập Củng Cố Kiến Thức</h2>
+                <p class="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
+                    Kiểm tra và khắc sâu lý thuyết trọng tâm về <span class="text-teal-300 font-semibold">Phân cắt đồng li & dị li</span>, <span class="text-teal-300 font-semibold">Tiểu phân trung gian</span> (Carbocation, Carbanion, Gốc tự do), <span class="text-teal-300 font-semibold">Quy luật độ bền</span> và <span class="text-teal-300 font-semibold">Tác nhân Electrophile / Nucleophile</span>.
+                </p>
+            </div>
+
+            <!-- Highlights Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left py-2">
+                <div class="bg-slate-900/60 border border-slate-700/50 p-4 rounded-2xl flex items-start space-x-3">
+                    <div class="p-2 bg-teal-500/10 rounded-lg text-teal-400 mt-0.5"><i class="fa-solid fa-bullseye text-base"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">20 Câu Hỏi</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Bám sát SGK trang 8 - 10</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900/60 border border-slate-700/50 p-4 rounded-2xl flex items-start space-x-3">
+                    <div class="p-2 bg-amber-500/10 rounded-lg text-amber-400 mt-0.5"><i class="fa-solid fa-stopwatch text-base"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">30s / Câu</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Rèn phản xạ trả lời nhanh</p>
+                    </div>
+                </div>
+                <div class="bg-slate-900/60 border border-slate-700/50 p-4 rounded-2xl flex items-start space-x-3">
+                    <div class="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 mt-0.5"><i class="fa-solid fa-lightbulb text-base"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Giải Thích Chi Tiết</h4>
+                        <p class="text-xs text-slate-400 mt-0.5">Hiểu rõ bản chất từng câu</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="btn-start" class="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 font-bold rounded-2xl text-slate-950 shadow-xl shadow-teal-500/25 transition-all transform active:scale-95 flex items-center justify-center space-x-2 mx-auto text-base">
+                <span>Bắt Đầu Làm Bài Ngay</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- SCREEN 2: Active Quiz -->
+        <div id="screen-quiz" class="hidden bg-slate-800/90 border border-slate-700/80 rounded-3xl p-5 sm:p-8 shadow-2xl backdrop-blur-xl space-y-6">
+            
+            <!-- Status Header -->
+            <div class="flex items-center justify-between gap-4 pb-4 border-b border-slate-700/60">
+                <!-- Progress counter -->
+                <div class="flex items-center space-x-3">
+                    <span id="txt-q-number" class="text-xs sm:text-sm font-bold text-teal-400 bg-teal-500/10 px-3 py-1.5 rounded-xl border border-teal-500/20">
+                        Câu 1 / 20
+                    </span>
+                    <span id="txt-score" class="text-xs sm:text-sm font-semibold text-amber-300 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/20 flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-amber-400"></i>
+                        <span>0 Điểm</span>
+                    </span>
+                </div>
+
+                <!-- Timer -->
+                <div class="flex items-center space-x-2 bg-slate-900/80 px-4 py-1.5 rounded-2xl border border-slate-700 text-sm font-mono font-bold" id="timer-container">
+                    <i class="fa-solid fa-clock text-teal-400" id="timer-icon"></i>
+                    <span id="txt-timer" class="text-teal-300">30s</span>
+                </div>
+            </div>
+
+            <!-- Quiz Progress Bar -->
+            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-700/50">
+                <div id="progress-bar-fill" class="bg-gradient-to-r from-teal-500 to-emerald-400 h-full w-[5%] transition-all duration-300"></div>
+            </div>
+
+            <!-- Question & Topic Tag -->
+            <div class="space-y-3">
+                <div id="txt-category" class="inline-block px-3 py-1 bg-indigo-500/15 border border-indigo-400/30 rounded-full text-xs font-semibold text-indigo-300">
+                    Chủ đề: Khái niệm cơ bản
+                </div>
+                <h3 id="txt-question" class="text-lg sm:text-xl font-bold text-white leading-snug">
+                    Nội dung câu hỏi đang được tải...
+                </h3>
+            </div>
+
+            <!-- Options Grid -->
+            <div id="options-grid" class="grid grid-cols-1 gap-3 pt-1">
+                <!-- Dynamic options injected here -->
+            </div>
+
+            <!-- Explanation Box (Initially Hidden) -->
+            <div id="box-explanation" class="hidden p-4 sm:p-5 rounded-2xl border transition-all duration-300 space-y-1.5 text-sm">
+                <div id="exp-title" class="font-bold flex items-center gap-2"></div>
+                <div id="exp-text" class="text-slate-300 leading-relaxed"></div>
+            </div>
+
+            <!-- Next Button Footer -->
+            <div class="flex justify-end pt-2 border-t border-slate-700/40">
+                <button id="btn-next" class="hidden px-7 py-3 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold rounded-xl shadow-lg transition transform active:scale-95 flex items-center space-x-2 text-sm">
+                    <span id="btn-next-text">Câu tiếp theo</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: Final Results -->
+        <div id="screen-results" class="hidden bg-slate-800/90 border border-slate-700/80 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl text-center space-y-6">
+            <div class="inline-flex p-5 bg-amber-500/20 border border-amber-400/30 rounded-3xl text-amber-400 mb-2 shadow-lg">
+                <i class="fa-solid fa-trophy text-5xl"></i>
+            </div>
+
+            <div class="space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Hoàn Thành Bài Kiểm Tra!</h2>
+                <p id="txt-assessment" class="text-sm sm:text-base text-slate-300 max-w-md mx-auto">
+                    Chúc mừng bạn đã hoàn thành 20 câu hỏi về Cơ chế phản ứng!
+                </p>
+            </div>
+
+            <!-- Score Summary Card -->
+            <div class="bg-slate-900/80 border border-slate-700 p-6 rounded-3xl max-w-sm mx-auto space-y-4">
+                <div>
+                    <div id="txt-final-score" class="text-4xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-300">
+                        18 / 20
+                    </div>
+                    <div class="text-xs text-slate-400 uppercase tracking-wider font-semibold mt-1">Tổng điểm số đạt được</div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-800 text-left">
+                    <div class="bg-emerald-500/10 border border-emerald-500/20 p-3 rounded-xl">
+                        <div id="txt-correct-count" class="text-base font-bold text-emerald-400">18 Câu</div>
+                        <div class="text-xs text-slate-400">Trả lời đúng</div>
+                    </div>
+                    <div class="bg-rose-500/10 border border-rose-500/20 p-3 rounded-xl">
+                        <div id="txt-incorrect-count" class="text-base font-bold text-rose-400">2 Câu</div>
+                        <div class="text-xs text-slate-400">Chưa chính xác</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-3 pt-2">
+                <button id="btn-restart" class="px-8 py-3.5 bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold rounded-xl shadow-xl transition transform active:scale-95 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Làm Lại Bài Quiz</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="py-4 text-center text-xs text-slate-500 border-t border-slate-800/80">
+        <p>Tài liệu học tập Chuyên đề Hóa học 12 • Kết nối tri thức với cuộc sống</p>
+    </footer>
+
+    <script>
+        /* 
+         * Question Data Bank (20 Questions)
+         * Aligned strictly with Grade 12 Chemistry Topic 1 (Connect Knowledge textbook, pages 8-10)
+         */
+        const quizData = [
+            {
+                category: "Khái niệm cơ bản",
+                question: "Cơ chế phản ứng hóa học hữu cơ cho chúng ta biết thông tin gì chi tiết nhất?",
+                options: [
+                    "Sản phẩm duy nhất thu được sau phản ứng",
+                    "Trình tự từng bước bẻ gãy liên kết cũ và hình thành liên kết mới",
+                    "Khối lượng chính xác của các chất tham gia",
+                    "Hằng số cân bằng KC của phản ứng ở điều kiện tiêu chuẩn"
+                ],
+                correct: 1,
+                explanation: "Cơ chế phản ứng mô tả chi tiết diễn biến từng bước của phản ứng, bao gồm sự phân cắt các liên kết cũ và sự hình thành các liên kết mới."
+            },
+            {
+                category: "Phân cắt liên kết",
+                question: "Trong sự phân cắt đồng li (homolytic cleavage), cặp electron liên kết cộng hóa trị sẽ biến đổi như thế nào?",
+                options: [
+                    "Chuyển hoàn toàn về nguyên tử có độ âm điện lớn hơn",
+                    "Chuyển hoàn toàn về nguyên tử carbon",
+                    "Chia đều cho hai nguyên tử, mỗi nguyên tử giữ 1 electron",
+                    "Bị mất đi hoàn toàn tạo thành các ion tự do"
+                ],
+                correct: 2,
+                explanation: "Phân cắt đồng li là sự phân cắt liên kết trong đó mỗi nguyên tử giữ lại 1 electron từ cặp electron dùng chung, tạo ra các gốc tự do."
+            },
+            {
+                category: "Phân cắt liên kết",
+                question: "Sự phân cắt dị li (heterolytic cleavage) liên kết C-X trong đó X có độ âm điện lớn hơn C sẽ sinh ra tiểu phân chứa carbon dạng nào?",
+                options: [
+                    "Carbocation (mang điện tích dương)",
+                    "Carbanion (mang điện tích âm)",
+                    "Gốc tự do (trung hòa điện)",
+                    "Phân tử alkane trung hòa"
+                ],
+                correct: 0,
+                explanation: "Vì X có độ âm điện lớn hơn nên chiếm cả cặp electron liên kết (thành X-), làm cho nguyên tử Carbon bị thiếu electron và trở thành Carbocation (C+)."
+            },
+            {
+                category: "Tiểu phân trung gian",
+                question: "Tiểu phân Carbocation (C+) có đặc điểm nào sau đây về lớp vỏ electron của nguyên tử carbon mang điện tích dương?",
+                options: [
+                    "Có đủ 8 electron ở lớp ngoài cùng",
+                    "Chỉ có 6 electron ở lớp ngoài cùng (thiếu electron)",
+                    "Có 7 electron ở lớp ngoài cùng (chứa 1 e độc thân)",
+                    "Có 1 cặp electron tự do không liên kết"
+                ],
+                correct: 1,
+                explanation: "Nguyên tử C mang điện tích dương trong Carbocation chỉ tạo 3 liên kết sigma xung quanh (có 6 electron lớp ngoài cùng), do đó rất thèm/thiếu electron."
+            },
+            {
+                category: "Tiểu phân trung gian",
+                question: "Tiểu phân Carbanion (C-) chứa nguyên tử carbon mang điện tích âm có đặc điểm gì?",
+                options: [
+                    "Chỉ có 6 electron lớp ngoài cùng",
+                    "Mang 1 electron độc thân",
+                    "Có 8 electron lớp ngoài cùng và chứa 1 cặp electron tự do",
+                    "Không có khả năng tham gia phản ứng hóa học"
+                ],
+                correct: 2,
+                explanation: "Carbanion mang điện tích âm, nguyên tử C chứa 8 electron lớp ngoài cùng bao gồm 1 cặp electron chưa liên kết (cặp e tự do)."
+            },
+            {
+                category: "Tiểu phân trung gian",
+                question: "Gốc tự do (Radical) là tiểu phân trung gian có đặc điểm nổi bật nào?",
+                options: [
+                    "Mang điện tích dương +1",
+                    "Mang điện tích âm -1",
+                    "Trung hòa về điện và chứa 1 electron độc thân",
+                    "Có orbital trống không chứa electron"
+                ],
+                correct: 2,
+                explanation: "Gốc tự do sinh ra do phân cắt đồng li, trung hòa về điện tích và chứa ít nhất 1 electron độc thân hoạt động hóa học rất mạnh."
+            },
+            {
+                category: "Quy luật độ bền",
+                question: "Thứ tự độ bền GIẢM DẦN của các gốc tự do alkyl theo bậc carbon là gì?",
+                options: [
+                    "Gốc bậc III > Gốc bậc II > Gốc bậc I > Gốc Methyl",
+                    "Gốc Methyl > Gốc bậc I > Gốc bậc II > Gốc bậc III",
+                    "Gốc bậc I > Gốc bậc II > Gốc bậc III > Gốc Methyl",
+                    "Tất cả các gốc tự do có độ bền bằng nhau"
+                ],
+                correct: 0,
+                explanation: "Độ bền của gốc tự do tăng theo bậc của nguyên tử carbon chứa electron độc thân: Bậc III > Bậc II > Bậc I > Methyl."
+            },
+            {
+                category: "Quy luật độ bền",
+                question: "Đối với Carbocation (C+), thứ tự độ bền tương đối nào sau đây là ĐÚNG?",
+                options: [
+                    "(CH3)3C+ < (CH3)2CH+ < CH3CH2+ < CH3+",
+                    "(CH3)3C+ > (CH3)2CH+ > CH3CH2+ > CH3+",
+                    "CH3CH2+ > (CH3)3C+ > (CH3)2CH+ > CH3+",
+                    "(CH3)2CH+ > (CH3)3C+ > CH3CH2+ > CH3+"
+                ],
+                correct: 1,
+                explanation: "Carbocation bậc III bền nhất do có 3 nhóm alkyl đẩy electron (+I) giải tỏa điện tích dương. Do đó: Bậc III > Bậc II > Bậc I > Methyl."
+            },
+            {
+                category: "Quy luật độ bền",
+                question: "Ngược lại với Carbocation và Gốc tự do, quy luật độ bền của Carbanion (C-) biến đổi như thế nào?",
+                options: [
+                    "Carbanion bậc III bền nhất",
+                    "Carbanion Methyl và bậc I bền hơn Carbanion bậc III",
+                    "Carbanion bậc II bền hơn Carbanion bậc I",
+                    "Độ bền Carbanion không phụ thuộc vào bậc carbon"
+                ],
+                correct: 1,
+                explanation: "Do các nhóm alkyl đẩy electron làm tăng mật độ điện tích âm trên C-, làm Carbanion kém bền hơn. Do đó độ bền: CH3- > Bậc I > Bậc II > Bậc III."
+            },
+            {
+                category: "Giải thích bản chất",
+                question: "Vì sao các nhóm alkyl (như -CH3, -C2H5) lại làm TĂNG độ bền của Carbocation (C+)?",
+                options: [
+                    "Do các nhóm alkyl hút electron rất mạnh",
+                    "Do các nhóm alkyl có hiệu ứng đẩy electron (+I), làm giải tỏa điện tích dương",
+                    "Do các nhóm alkyl làm giảm kích thước phân tử",
+                    "Do nhóm alkyl biến C+ thành gốc tự do"
+                ],
+                correct: 1,
+                explanation: "Nhóm alkyl có hiệu ứng đẩy electron (+I). Việc đẩy bớt mật độ electron về phía C+ giúp phân tán (giải tỏa) điện tích dương, làm hệ bền vững hơn."
+            },
+            {
+                category: "Tác nhân phản ứng",
+                question: "Tác nhân Electrophile (thường ký hiệu là E+) có bản chất là gì?",
+                options: [
+                    "Tác nhân giàu electron, thích nhường cặp electron",
+                    "Tác nhân 'ái electron', thiếu electron và có khả năng nhận cặp electron",
+                    "Tác nhân luôn mang điện tích âm",
+                    "Chất không tham gia tạo liên kết hóa học"
+                ],
+                correct: 1,
+                explanation: "Electrophile (ái electron) là tiểu phân thiếu electron hoặc mang điện tích dương, tìm kiếm và nhận cặp electron từ chất khác."
+            },
+            {
+                category: "Tác nhân phản ứng",
+                question: "Trong các tiểu phân sau, tiểu phân nào đóng vai trò là tác nhân Electrophile?",
+                options: [
+                    "H+ (Cation hydrogen)",
+                    "OH- (Anion hydroxide)",
+                    "NH3 (Molecule ammonia)",
+                    "Cl- (Anion chloride)"
+                ],
+                correct: 0,
+                explanation: "H+ mang điện tích dương và có orbital trống nên là tác nhân electrophile (ái electron) điển hình."
+            },
+            {
+                category: "Tác nhân phản ứng",
+                question: "Tác nhân Nucleophile (thường ký hiệu Nu) có đặc điểm nổi bật nào?",
+                options: [
+                    "Thiếu electron và có orbital trống",
+                    "Tác nhân 'ái hạt nhân', giàu electron và có khả năng nhường cặp electron",
+                    "Luôn luôn mang điện tích dương",
+                    "Chỉ tồn tại ở dạng phân tử trung hòa"
+                ],
+                correct: 1,
+                explanation: "Nucleophile (ái hạt nhân) là tác nhân giàu electron (mang điện tích âm hoặc có cặp electron tự do), thích tấn công vào vùng thiếu electron."
+            },
+            {
+                category: "Tác nhân phản ứng",
+                question: "Tiểu phân nào sau đây đóng vai trò là tác nhân Nucleophile?",
+                options: [
+                    "NO2+ (Ion nitronium)",
+                    "AlCl3 (Aluminium chloride)",
+                    "OH- (Ion hydroxide)",
+                    "BF3 (Boron trifluoride)"
+                ],
+                correct: 2,
+                explanation: "Ion OH- mang điện tích âm và có cặp electron tự do trên nguyên tử O, là tác nhân nucleophile mạnh."
+            },
+            {
+                category: "Ứng dụng cơ chế",
+                question: "Trong phản ứng thế brom hóa Methane (CH4 + Br2 -> CH3Br + HBr) khi chiếu sáng, bước khơi mào xảy ra sự phân cắt gì?",
+                options: [
+                    "Phân cắt dị li Br2 tạo Br+ và Br-",
+                    "Phân cắt đồng li Br2 tạo 2 gốc tự do Br•",
+                    "Phân cắt dị li liên kết C-H tạo CH3-",
+                    "Phân cắt đồng li C-H tạo C+ và H-"
+                ],
+                correct: 1,
+                explanation: "Ánh sáng phân cắt đồng li liên kết Br-Br tạo ra 2 gốc tự do bromine Br• hoạt động để khơi mào chuỗi phản ứng."
+            },
+            {
+                category: "Nhận biết tiểu phân",
+                question: "Cho carbocation (CH3)2CH+. Đây là carbocation bậc mấy?",
+                options: [
+                    "Carbocation bậc I",
+                    "Carbocation bậc II",
+                    "Carbocation bậc III",
+                    "Carbocation bậc IV"
+                ],
+                correct: 1,
+                explanation: "Nguyên tử C mang điện tích dương liên kết trực tiếp với 2 nguyên tử C khác (2 nhóm methyl), do đó đây là carbocation bậc II."
+            },
+            {
+                category: "Phân biệt tác nhân",
+                question: "Trong phản ứng thế: CH3Br + OH- -> CH3OH + Br-, ion OH- đóng vai trò là tác nhân gì?",
+                options: [
+                    "Tác nhân Electrophile",
+                    "Tác nhân Nucleophile",
+                    "Gốc tự do",
+                    "Chất xúc tác trơ"
+                ],
+                correct: 1,
+                explanation: "OH- sử dụng cặp electron tự do của nó tấn công vào nguyên tử carbon thiếu electron của CH3Br, nên đóng vai trò là tác nhân Nucleophile."
+            },
+            {
+                category: "Phân biệt tác nhân",
+                question: "Trong phản ứng cộng: CH2=CH2 + H+ -> CH3-CH2+, ion H+ đóng vai trò là tác nhân gì?",
+                options: [
+                    "Tác nhân Electrophile",
+                    "Tác nhân Nucleophile",
+                    "Gốc tự do",
+                    "Carbanion"
+                ],
+                correct: 0,
+                explanation: "H+ thiếu electron tấn công vào liên kết đôi C=C (vùng giàu electron pi), đóng vai trò là tác nhân Electrophile."
+            },
+            {
+                category: "So sánh tổng hợp",
+                question: "Cho 3 gốc tự do: (1) CH3-CH2• ; (2) (CH3)2CH• ; (3) (CH3)3C•. Thứ tự độ bền TĂNG DẦN là:",
+                options: [
+                    "(1) < (2) < (3)",
+                    "(3) < (2) < (1)",
+                    "(2) < (1) < (3)",
+                    "(1) < (3) < (2)"
+                ],
+                correct: 0,
+                explanation: "Độ bền gốc tự do tăng theo bậc carbon: (1) Bậc I < (2) Bậc II < (3) Bậc III."
+            },
+            {
+                category: "So sánh tổng hợp",
+                question: "Trong số các carbanion sau, carbanion nào kém bền nhất?",
+                options: [
+                    "CH3- (Methyl carbanion)",
+                    "CH3-CH2- (Ethyl carbanion)",
+                    "(CH3)2CH- (Isopropyl carbanion)",
+                    "(CH3)3C- (tert-Butyl carbanion)"
+                ],
+                correct: 3,
+                explanation: "Carbanion (CH3)3C- có 3 nhóm methyl cùng đẩy electron vào C-, làm mật độ điện tích âm tăng cao nhất nên kém bền nhất."
+            }
+        ];
+
+        /* Application State Variables */
+        let currentQuestion = 0;
+        let score = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let timerSeconds = 30;
+        let timerInterval = null;
+        let isAnswered = false;
+
+        /* DOM Element Selectors */
+        const screenWelcome = document.getElementById('screen-welcome');
+        const screenQuiz = document.getElementById('screen-quiz');
+        const screenResults = document.getElementById('screen-results');
+
+        const btnStart = document.getElementById('btn-start');
+        const btnNext = document.getElementById('btn-next');
+        const btnNextText = document.getElementById('btn-next-text');
+        const btnRestart = document.getElementById('btn-restart');
+
+        const txtQNumber = document.getElementById('txt-q-number');
+        const txtScore = document.getElementById('txt-score');
+        const txtTimer = document.getElementById('txt-timer');
+        const timerIcon = document.getElementById('timer-icon');
+        const timerContainer = document.getElementById('timer-container');
+        const progressBarFill = document.getElementById('progress-bar-fill');
+
+        const txtCategory = document.getElementById('txt-category');
+        const txtQuestion = document.getElementById('txt-question');
+        const optionsGrid = document.getElementById('options-grid');
+
+        const boxExplanation = document.getElementById('box-explanation');
+        const expTitle = document.getElementById('exp-title');
+        const expText = document.getElementById('exp-text');
+
+        const txtFinalScore = document.getElementById('txt-final-score');
+        const txtCorrectCount = document.getElementById('txt-correct-count');
+        const txtIncorrectCount = document.getElementById('txt-incorrect-count');
+        const txtAssessment = document.getElementById('txt-assessment');
+
+        /* Event Listeners Initialization */
+        btnStart.addEventListener('click', startQuiz);
+        btnNext.addEventListener('click', handleNextQuestion);
+        btnRestart.addEventListener('click', restartQuiz);
+
+        /* Functions Implementation */
+
+        function startQuiz() {
+            screenWelcome.classList.add('hidden');
+            screenQuiz.classList.remove('hidden');
+            screenResults.classList.add('hidden');
+
+            currentQuestion = 0;
+            score = 0;
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            isAnswered = false;
+            btnNext.classList.add('hidden');
+            boxExplanation.classList.add('hidden');
+
+            const qData = quizData[currentQuestion];
+
+            // Progress Header
+            txtQNumber.textContent = `Câu ${currentQuestion + 1} / ${quizData.length}`;
+            txtScore.textContent = `${score} Điểm`;
+            
+            const progressPct = ((currentQuestion + 1) / quizData.length) * 100;
+            progressBarFill.style.width = `${progressPct}%`;
+
+            // Question Details
+            txtCategory.textContent = `Chủ đề: ${qData.category}`;
+            txtQuestion.textContent = qData.question;
+
+            // Render Option Buttons
+            optionsGrid.innerHTML = '';
+            const optionLetters = ['A', 'B', 'C', 'D'];
+
+            qData.options.forEach((optionText, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn w-full text-left p-4 rounded-2xl bg-slate-900/60 hover:bg-slate-700/60 border border-slate-700/80 hover:border-teal-500/50 flex items-center justify-between text-slate-200 group text-sm sm:text-base font-medium';
+                btn.innerHTML = `
+                    <div class="flex items-center space-x-3.5 pr-2">
+                        <span class="w-8 h-8 rounded-xl bg-slate-800 border border-slate-600 flex items-center justify-center text-xs font-bold text-teal-400 group-hover:bg-teal-500 group-hover:text-slate-950 transition-colors shrink-0">
+                            ${optionLetters[index]}
+                        </span>
+                        <span>${escapeHtml(optionText)}</span>
+                    </div>
+                    <i class="fa-solid fa-circle-check text-teal-400 opacity-0 group-hover:opacity-20 transition-opacity"></i>
+                `;
+                btn.addEventListener('click', () => handleOptionClick(index, btn));
+                optionsGrid.appendChild(btn);
+            });
+
+            startTimer();
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerSeconds = 30;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                timerSeconds--;
+                updateTimerDisplay();
+
+                if (timerSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            txtTimer.textContent = `${timerSeconds}s`;
+            if (timerSeconds <= 7) {
+                txtTimer.className = 'text-rose-400 animate-pulse';
+                timerIcon.className = 'fa-solid fa-clock text-rose-400 animate-spin';
+                timerContainer.className = 'flex items-center space-x-2 bg-rose-500/10 px-4 py-1.5 rounded-2xl border border-rose-500/30 text-sm font-mono font-bold';
+            } else {
+                txtTimer.className = 'text-teal-300';
+                timerIcon.className = 'fa-solid fa-clock text-teal-400';
+                timerContainer.className = 'flex items-center space-x-2 bg-slate-900/80 px-4 py-1.5 rounded-2xl border border-slate-700 text-sm font-mono font-bold';
+            }
+        }
+
+        function handleTimeOut() {
+            if (isAnswered) return;
+            isAnswered = true;
+            incorrectAnswers++;
+
+            disableAllOptions();
+            highlightCorrectOption();
+            showExplanation(false, "Đã hết thời gian 30 giây cho câu hỏi này!");
+            showNextButton();
+        }
+
+        function handleOptionClick(selectedIndex, selectedBtn) {
+            if (isAnswered) return;
+            isAnswered = true;
+            clearInterval(timerInterval);
+
+            const qData = quizData[currentQuestion];
+            const isCorrect = (selectedIndex === qData.correct);
+
+            disableAllOptions();
+
+            if (isCorrect) {
+                score += 10;
+                correctAnswers++;
+                txtScore.textContent = `${score} Điểm`;
+
+                selectedBtn.className = 'option-btn w-full text-left p-4 rounded-2xl bg-emerald-500/20 border-2 border-emerald-500 text-emerald-200 flex items-center justify-between text-sm sm:text-base font-semibold';
+                selectedBtn.querySelector('i').className = 'fa-solid fa-circle-check text-emerald-400 text-lg opacity-100';
+                
+                showExplanation(true, qData.explanation);
+            } else {
+                incorrectAnswers++;
+                selectedBtn.className = 'option-btn w-full text-left p-4 rounded-2xl bg-rose-500/20 border-2 border-rose-500 text-rose-200 flex items-center justify-between text-sm sm:text-base font-semibold';
+                selectedBtn.querySelector('i').className = 'fa-solid fa-circle-xmark text-rose-400 text-lg opacity-100';
+
+                highlightCorrectOption();
+                showExplanation(false, qData.explanation);
+            }
+
+            showNextButton();
+        }
+
+        function disableAllOptions() {
+            const buttons = optionsGrid.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.style.cursor = 'default';
+            });
+        }
+
+        function highlightCorrectOption() {
+            const qData = quizData[currentQuestion];
+            const buttons = optionsGrid.querySelectorAll('button');
+            const correctBtn = buttons[qData.correct];
+
+            if (correctBtn) {
+                correctBtn.className = 'option-btn w-full text-left p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/60 text-emerald-300 flex items-center justify-between text-sm sm:text-base font-semibold';
+                const icon = correctBtn.querySelector('i');
+                if (icon) {
+                    icon.className = 'fa-solid fa-circle-check text-emerald-400 text-lg opacity-100';
+                }
+            }
+        }
+
+        function showExplanation(isCorrect, text) {
+            boxExplanation.classList.remove('hidden');
+            if (isCorrect) {
+                boxExplanation.className = 'p-4 sm:p-5 rounded-2xl border bg-emerald-500/10 border-emerald-500/30 text-emerald-300';
+                expTitle.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i><span>Chính xác!</span>';
+            } else {
+                boxExplanation.className = 'p-4 sm:p-5 rounded-2xl border bg-rose-500/10 border-rose-500/30 text-rose-300';
+                expTitle.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-rose-400 text-lg"></i><span>Chưa chính xác!</span>';
+            }
+            expText.textContent = text;
+        }
+
+        function showNextButton() {
+            if (currentQuestion < quizData.length - 1) {
+                btnNextText.textContent = 'Câu tiếp theo';
+            } else {
+                btnNextText.textContent = 'Xem kết quả tổng kết';
+            }
+            btnNext.classList.remove('hidden');
+        }
+
+        function handleNextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                renderQuestion();
+            } else {
+                showFinalResults();
+            }
+        }
+
+        function showFinalResults() {
+            screenQuiz.classList.add('hidden');
+            screenResults.classList.remove('hidden');
+
+            const totalScorePossible = quizData.length * 10;
+            txtFinalScore.textContent = `${score} / ${totalScorePossible}`;
+            txtCorrectCount.textContent = `${correctAnswers} Câu`;
+            txtIncorrectCount.textContent = `${incorrectAnswers} Câu`;
+
+            const percentage = (correctAnswers / quizData.length) * 100;
+
+            if (percentage >= 90) {
+                txtAssessment.textContent = "🌟 Xuất sắc! Bạn đã nắm cực kỳ vững chắc toàn bộ lý thuyết và bài tập về Cơ chế phản ứng!";
+            } else if (percentage >= 70) {
+                txtAssessment.textContent = "👍 Khá tốt! Bạn đã hiểu đúng hầu hết các khái niệm về phân cắt liên kết và quy luật độ bền.";
+            } else if (percentage >= 50) {
+                txtAssessment.textContent = "📚 Kết quả Đạt. Nên ôn tập kỹ hơn về cách phân biệt tác nhân Electrophile và Nucleophile nhé.";
+            } else {
+                txtAssessment.textContent = "💪 Đừng nản lòng! Hãy đọc lại SGK trang 8 - 10 và bấm 'Làm lại bài' để luyện tập lại nhé.";
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // Utility helper to safely escape string HTML
+        function escapeHtml(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
